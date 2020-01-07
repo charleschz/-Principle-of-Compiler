@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
- * @auther 陈含章 20174459
+ * @auther charleschz
  * 词法分析
  */
 public class lexAna {
