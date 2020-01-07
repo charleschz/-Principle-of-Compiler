@@ -1,0 +1,63 @@
+program : type 'main' '(' ')' innerprogram
+        ;
+innerprogram : '{' expmaker '}'
+             ;
+expmaker : type id idassignment ';' expmaker
+         | epsilon
+         | id howtoassign easyexp ASSI ';' expmaker
+         | 'if' '(' boolexp ')' IF '{' LEVELA expmaker '}' LEVELS iselse expmaker
+         | 'struct' id '{' expmaker '}' ';' expmaker
+         | 'while' WH '(' boolexp ')' DO '{' LEVELA expmaker '}' LEVELS WE expmaker
+         ;
+iselse :  epsilon IEFIR
+       | 'else' EL isifagain
+       ;
+isifagain : '{' LEVELA expmaker '}' LEVELS IESEC
+         | epsilon
+          ;
+howtoassign : PUSH '='
+            | PUSH '[' float_const PUSHNUM ']' '='
+            ;
+idassignment : epsilon
+             | PUSH '=' easyexp ASSI
+             | '[' float_const ']'
+             ;
+boolexp : numorid1 optnumorid2
+        ;
+numorid1 : float_const PUSH
+        | id PUSH
+        ;
+numorid2 : float_const PUSH
+        | id PUSH
+        | epsilon
+        ;
+optnumorid2 : '>' numorid2 GEQG
+    | '<' numorid2 GEQL
+    | '==' numorid2 GEQE
+    | '>=' numorid2 GEQGE
+    | '<=' numorid2 GEQLE
+    | epsilon
+    ;
+easyexp : t e1
+        ;
+e1 : '+' t GEQA e1
+   | '-' t GEQS e1
+   | epsilon
+   ;
+t : f t1
+  ;
+t1 : '*' f GEQM t1
+   | '/' f GEQD t1
+   | epsilon
+   ;
+f : id PUSH
+  | float_const PUSH
+  | string PUSH
+  | char_const PUSH
+  | '(' easyexp ')'
+  ;
+type : 'int'
+     | 'char'
+     | 'float'
+     | 'string'
+     ;
