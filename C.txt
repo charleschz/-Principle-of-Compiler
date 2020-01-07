@@ -1,0 +1,17 @@
+int main(){
+int a=7;
+int c=0;
+int b=7;
+char ch = 'a';
+  while(c<=0){
+        a=a+1;
+   }
+   struct student{
+      int age;
+      string name;
+      int IDnum;
+   };
+   if(a==0){
+     if(b==7){c=0;}
+   }
+}
